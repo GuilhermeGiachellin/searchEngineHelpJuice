@@ -1,59 +1,73 @@
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   username: gui      
-#   password: 9557
-#   host: localhost    
-  
-
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-
-# development:
-#   <<: *default
-#   database: search_engine_help_juice_development
-
-
-# test:
-#   <<: *default
-#   database: search_engine_help_juice_test
-
-
-# production:
-#   primary: &primary_production
-#     <<: *default
-#     database: search_engine_help_juice_production
-#     username: search_engine_help_juice
-#     password: <%= ENV["SEARCH_ENGINE_HELP_JUICE_DATABASE_PASSWORD"] %>
-#   cache:
-#     <<: *primary_production
-#     database: search_engine_help_juice_production_cache
-#     migrations_paths: db/cache_migrate
-#   queue:
-#     <<: *primary_production
-#     database: search_engine_help_juice_production_queue
-#     migrations_paths: db/queue_migrate
-#   cable:
-#     <<: *primary_production
-#     database: search_engine_help_juice_production_cable
-#     migrations_paths: db/cable_migrate
-
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: gui      
+  password: 9557
+  host: localhost    
+  
+
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
-  username: <%= ENV.fetch("DB_USERNAME") { "gui" } %>
-  password: <%= ENV.fetch("DB_PASSWORD") { "9557" } %>
+
 
 development:
   <<: *default
   database: search_engine_help_juice_development
 
+
 test:
   <<: *default
   database: search_engine_help_juice_test
 
+
 production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  primary: &primary_production
+    <<: *default
+    database: search_engine_help_juice_production
+    username: search_engine_help_juice
+    password: <%= ENV["SEARCH_ENGINE_HELP_JUICE_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: search_engine_help_juice_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: search_engine_help_juice_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: search_engine_help_juice_production_cable
+    migrations_paths: db/cable_migrate
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+
+# development:
+#   <<: *default
+#   database: your_app_development
+#   username: your_db_user
+#   password: your_db_password
+#   host: localhost
+
+# test:
+#   <<: *default
+#   database: your_app_test
+#   username: your_db_user
+#   password: your_db_password
+#   host: localhost
+
+# production:
+#   primary:
+#     <<: *default
+#     database: <%= ENV['DB_NAME'] || 'your_app_production' %>
+#     username: <%= ENV['DB_USER'] || 'your_db_user' %>
+#     password: <%= ENV['DB_PASSWORD'] || 'your_db_password' %>
+#     host: <%= ENV['DB_HOST'] || 'localhost' %>
+#   queue:
+#     <<: *default
+#     database: <%= ENV['DB_NAME_QUEUE'] || 'your_app_queue' %>
+#     username: <%= ENV['DB_USER_QUEUE'] || ENV['DB_USER'] || 'your_db_user' %>
+#     password: <%= ENV['DB_PASSWORD_QUEUE'] || ENV['DB_PASSWORD'] || 'your_db_password' %>
+#     host: <%= ENV['DB_HOST_QUEUE'] || ENV['DB_HOST'] || 'localhost' %>
+
