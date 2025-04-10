@@ -1,24 +1,21 @@
-# README
+# 🔎 Search Engine
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Rails application that replicates basic search functionality and display analytics that display what users were searching for .
 
-Things you may want to cover:
+## 💡 Features
 
-* Ruby version
+- ✅ Search articles by title
+- ✨ Autocomplete suggestions as you type
+- 🧠 Stores only the **most complete** version of a query
+- 🚫 Prevents duplicate search entries
 
-* System dependencies
+## 🛠️ Tech Stack
 
-* Configuration
+- Ruby on Rails 7+
+- PostgreSQL
+- RSpec for testing
 
-* Database creation
+## 🧪 Running the Test Suite
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+bundle exec rspec
