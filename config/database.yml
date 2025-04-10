@@ -42,22 +42,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("DB_USERNAME") { "gui" } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { "9557" } %>
 
 development:
   <<: *default
   database: search_engine_help_juice_development
-  username: gui
-  password: 9557
-  host: localhost
 
 test:
   <<: *default
   database: search_engine_help_juice_test
-  username: gui
-  password: 9557
-  host: localhost
 
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-
