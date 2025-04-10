@@ -14,32 +14,35 @@
 <% end %>
 
 <script>
-  const input = document.getElementById("search-input");
-  const suggestionsList = document.getElementById("suggestions");
+  document.addEventListener("turbo:load", function() {
+    const input = document.getElementById("search-input");
+    const suggestionsList = document.getElementById("suggestions");
 
-  input.addEventListener("input", async () => {
-    const query = input.value;
-    const url = input.dataset.suggestionsUrl + `?term=${encodeURIComponent(query)}`;
+    input.addEventListener("input", async () => {
+      const query = input.value;
+      const url = input.dataset.suggestionsUrl + `?term=${encodeURIComponent(query)}`;
 
-    try {
-      const res = await fetch(url);
-      const suggestions = await res.json();
+      try {
+        const res = await fetch(url);
+        const suggestions = await res.json();
 
-      suggestionsList.innerHTML = suggestions.map(searchText => `
-        <li class="suggestion-item"
-            onclick="document.getElementById('search-input').value='${searchText}'; suggestionsList.innerHTML = '';">
-          ${searchText}
-        </li>
-      `).join('');
-    } catch (err) {
-      console.error("Error fetching suggestions:", err);
-    }
-  });
+        suggestionsList.innerHTML = suggestions.map(searchText => `
+          <li class="suggestion-item"
+              onclick="document.getElementById('search-input').value='${searchText}'; suggestionsList.innerHTML = '';">
+            ${searchText}
+          </li>
+        `).join('');
+      } catch (err) {
+        console.error("Error fetching suggestions:", err);
+      }
+    });
 
-  document.addEventListener("click", (e) => {
-    if (!input.contains(e.target) && !suggestionsList.contains(e.target)) {
-      suggestionsList.innerHTML = "";
-    }
+    document.addEventListener("click", (e) => {
+      if (!input.contains(e.target) && !suggestionsList.contains(e.target)) {
+        suggestionsList.innerHTML = "";
+      }
+    });
   });
 </script>
+
 
