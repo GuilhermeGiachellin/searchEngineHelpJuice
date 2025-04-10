@@ -1,0 +1,13 @@
+<h1>Results for "<%= @query %>"</h1>
+
+<% if @results.any? %>
+  <ul>
+    <% @results.each do |article| %>
+      <li>
+        <strong><%= article.title %></strong><br>        
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No articles found matching your search.</p>
+<% end %>
