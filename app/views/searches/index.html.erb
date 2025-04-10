@@ -1,7 +1,45 @@
-<h1>Search Articles</h1>
+<h1>Search for Articles!</h1>
 
 <%= form_with url: search_results_path, method: :get, local: true do %>
-  <%= label_tag :query, "Search:" %>
-  <%= text_field_tag :query, params[:query] %>
+  <div class="search-container">    
+    <%= text_field_tag :query, params[:query], id: "search-input",
+        autocomplete: "off",
+        data: { suggestions_url: search_suggestions_path },
+        class: "search-input" %>
+
+    <ul id="suggestions" class="suggestions-list"></ul>
+  </div>
+  <br>
   <%= submit_tag "Search" %>
 <% end %>
+
+<script>
+  const input = document.getElementById("search-input");
+  const suggestionsList = document.getElementById("suggestions");
+
+  input.addEventListener("input", async () => {
+    const query = input.value;
+    const url = input.dataset.suggestionsUrl + `?term=${encodeURIComponent(query)}`;
+
+    try {
+      const res = await fetch(url);
+      const suggestions = await res.json();
+
+      suggestionsList.innerHTML = suggestions.map(searchText => `
+        <li class="suggestion-item"
+            onclick="document.getElementById('search-input').value='${searchText}'; suggestionsList.innerHTML = '';">
+          ${searchText}
+        </li>
+      `).join('');
+    } catch (err) {
+      console.error("Error fetching suggestions:", err);
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !suggestionsList.contains(e.target)) {
+      suggestionsList.innerHTML = "";
+    }
+  });
+</script>
+
