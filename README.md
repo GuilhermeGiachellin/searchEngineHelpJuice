@@ -15,6 +15,10 @@ This is a simple Rails application that replicates basic search functionality an
 - PostgreSQL
 - RSpec for testing
 
+## 💻 Demo
+
+- https://mysite-54xa.onrender.com/
+
 ## 🧪 Running the Test Suite
 
 ```bash
